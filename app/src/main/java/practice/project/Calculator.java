@@ -13,6 +13,8 @@ public class Calculator {
         }
         return instance;
     }
+
+    public double getOutput() {return output;}
     public CalculatorOutputs randomNumber(CalculatorInputs inputs){
         output = inputs.getValue(0);
         int size = inputs.getValues().length;

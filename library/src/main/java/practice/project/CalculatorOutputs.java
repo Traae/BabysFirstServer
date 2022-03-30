@@ -1,14 +1,19 @@
 package practice.project;
 
+import org.checkerframework.common.reflection.qual.GetMethod;
+
 import java.io.Serializable;
 
 public class CalculatorOutputs implements Serializable {
-    double value;
+
+
+    private double value;
 
     public CalculatorOutputs(double output){
         value = output;
     }
-    public double getValue(){
+
+    public double getValue() {
         return value;
     }
 }
