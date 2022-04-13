@@ -53,25 +53,25 @@ public class Calculator {
         return new CalculatorOutputs(output);
     }
     public CalculatorOutputs minus(CalculatorInputs inputs){
-        output = 0;
+        output = inputs.getValue(0);
         int size = inputs.getValues().length;
-        for (int i=0; i<size; i++){
+        for (int i=1; i<size; i++){
             output -= inputs.getValue(i);
         }
         return new CalculatorOutputs(output);
     }
     public CalculatorOutputs multiply(CalculatorInputs inputs){
-        output = 0;
+        output = inputs.getValue(0);
         int size = inputs.getValues().length;
-        for (int i=0; i<size; i++){
+        for (int i=1; i<size; i++){
             output *= inputs.getValue(i);
         }
         return new CalculatorOutputs(output);
     }
     public CalculatorOutputs divide(CalculatorInputs inputs){
-        output = 0;
+        output = inputs.getValue(0);
         int size = inputs.getValues().length;
-        for (int i=0; i<size; i++){
+        for (int i=1; i<size; i++){
             output /= inputs.getValue(i);
         }
         return new CalculatorOutputs(output);

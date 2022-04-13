@@ -1,9 +1,10 @@
 package practice.project;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class CalculatorInputs implements Serializable {
-    private int size;
+    public int size;
     private double[] values;
 
     public CalculatorInputs(){
@@ -15,7 +16,10 @@ public class CalculatorInputs implements Serializable {
     }
     public CalculatorInputs(double[] inputs){
         size = inputs.length;
-        values = inputs.clone();
+        values = new double[size];
+        for(int i=0; i < size; i++){
+            values[i] = inputs[i];
+        }
     }
 
     public double[] getValues() {
@@ -23,5 +27,12 @@ public class CalculatorInputs implements Serializable {
     }
     public double getValue(int index){
         return values[index];
+    }
+    @Override
+    public String toString() {
+        return "CalculatorInputs{" +
+                "size=" + size +
+                ", values=" + Arrays.toString(values) +
+                '}';
     }
 }

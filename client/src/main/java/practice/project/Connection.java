@@ -10,12 +10,7 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.List;
 
-/**
- * Singleton Helper class for connecting to the microservice backend
- *
- * @author Isaac D. Griffith
- * @version 1.0.0
- */
+
 public class Connection {
     private static final String httpThing = "http://%s:%s";
     private static final String STATUS_CALL = httpThing + CalculatorApi.root.path();
@@ -63,12 +58,14 @@ public class Connection {
         this.address = address;
         this.port = port;
         initialized = true;
-
         client = HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_1_1)
                 .followRedirects(HttpClient.Redirect.NORMAL)
                 .connectTimeout(Duration.ofSeconds(20))
                 .build();
+        if (test()){
+            System.out.println("Connection establish");
+        }
     }
     /**
      * Disconnects by setting the address, port, and client to null
@@ -97,6 +94,7 @@ public class Connection {
         try{
             return sendInputs(input, SUM_CALL);
         }catch(Exception e){
+            System.out.println(e.getCause());
             return new CalculatorOutputs(0);
         }
     }
@@ -197,6 +195,7 @@ public class Connection {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             return response.body().equals("OK");
         } catch (IOException | InterruptedException ex) {
+            System.out.println("HERE! in side connection . test\n" + ex.getMessage());
             return false;
         }
     }

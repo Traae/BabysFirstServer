@@ -29,13 +29,17 @@ public class desktopClient {
     }
     public static void main(String[] args) {
         Connection connection = Connection.instance();
-
         Scanner scan = new Scanner(System.in);
-        System.out.println("Please enter the address:\n");
-        String address = scan.nextLine();
-        System.out.println("Please enter the port:\n");
-        String port = scan.nextLine();
-        connection.initialize(address, port);
+        do{
+            System.out.println("Please enter the address:\n");
+            String address = scan.nextLine();
+            System.out.println("Please enter the port:\n");
+            String port = scan.nextLine();
+            connection.initialize(address, port);
+        }while (!connection.test());
+
+
+
 
         boolean continueApp = true;
         System.out.println("Greetings, This is the Baby's First Server calculator app\n");
@@ -77,12 +81,17 @@ public class desktopClient {
             }
 
             CalculatorInputs ci;
+
             if (values.size() > 0){
                 double[] v = new double[values.size()];
-                for (double d : values){
-                    v[values.indexOf(d)] = d;
+
+                for (int i=0; i< values.size(); i++){
+                    v[i] = values.get(i);
                 }
+
+
                 ci = new CalculatorInputs(v);
+                System.out.println("CI IS" + ci.toString());
             }
             else{
                 ci = new CalculatorInputs();
@@ -97,6 +106,7 @@ public class desktopClient {
                     continueApp = false;
                     break;
                 case "1":
+
                     CalculatorOutputs out = connection.sum(ci);
                     System.out.println("\nYour summation is:\n" + out.getValue());
                     break;

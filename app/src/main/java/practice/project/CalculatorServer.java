@@ -22,6 +22,8 @@ public class CalculatorServer {
 
 
     public static void main(String[] args) {
+        System.out.println("Fucked up on sever read in");
+
         String defaultMessage ="OK";
         String apiInfo = "This api is for the Calculator Microservice. \n" +
                 "We can return to you an output of up to 10 inputs. \n" +
@@ -61,9 +63,11 @@ public class CalculatorServer {
             });
             app.post(CalculatorApi.postForSum.path(), ctx -> {
                 if (Objects.equals(ctx.contentType(), "application/json")) {
-                    CalculatorInputs inputs = ctx.bodyAsClass(CalculatorInputs.class);
+                    CalculatorInputs inputs = gson.fromJson(ctx.body(), CalculatorInputs.class);
                     CalculatorOutputs output = calculator.sum(inputs);
                     ctx.json(output);
+                }else {
+                    System.out.println("Fucked up on sever read in");
                 }
             });
             app.post(CalculatorApi.postForDifference.path(), ctx -> {
